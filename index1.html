@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="target"></div>
+
+    <p>
+        <button id="control">Click here load ajax</button>
+    </p>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+
+            $("#control").click(function(){
+                var params ={};
+                params.current=30;
+                params.demo="danh muc";
+                params.type="products";
+
+                $.ajax({
+                    url:"demo_test.txt",
+                    data:params,
+                    type:"POST",
+                    dataType:'json',
+                    beforeSend:function(){
+                        alert("Toi sap gui du lieu di");
+                    },
+                    success:function(response){
+                        console.log(response);
+                        console.log(typeof response);
+
+                        var dataTrave=JSON.stringify(response);
+                        $("#target").html(dataTrave);
+
+                    },
+                    error:function() {
+                        alert("AJAX bi loi!");
+                    },
+                    complete: function() {
+                        alert("Ajax da hoan thanh");
+                    }
+                });
+            })  ;
+        });
+    </script>
+</body>
+</html>
